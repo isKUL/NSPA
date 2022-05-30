@@ -7,4 +7,4 @@ Collection of scripts and modules for automation of IT processes
 [_KUL](https://github.com/isKUL)
 
 ## PowerShell
-[ADPGID](ADPGID/README.md) - Changing a user's PrimaryGroupID in Active Directory
+[ADPGID](/ADPGID/) - Changing a user's PrimaryGroupID in Active Directory
