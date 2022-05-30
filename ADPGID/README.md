@@ -8,7 +8,7 @@ Changing a user's PrimaryGroupID in Active Directory
 
 ## How to use it?
 In the client code, connect the code with class **ADPGID** using the command:
-`Using module ".\ADPGID.psm1"`
+```Using module ".\ADPGID.psm1"```
 Using an object of the class specify your domain of Active Directory and specify which user needs to change the PrimaryGroupID:
 ```
 [ADPGID]::new("mydomain.local").DoChangePGID("kul","groupOfSuperStars")
