@@ -1,4 +1,4 @@
-﻿# ADPGID
+﻿# ADNAM
 Using native libraries .NET Framework for working with Active Directory via PowerShell
 
 ## What are the requirements?
