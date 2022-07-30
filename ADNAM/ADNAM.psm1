@@ -1,14 +1,12 @@
-function NetUserPrincipal {
+function Get-NetUserPrincipal {
     param (
-        [Parameter(Position=0)]
         [string] $domainName,
-        [Parameter(Position=1)]
         [string] $userName
     )
     
     if ( -not ("System.DirectoryServices.AccountManagement.PrincipalContext" -as [type])) 
     { 
-        Add-Type -AssemblyName System.DirectoryServices.AccountManagement
+        Add-Type -AssemblyName System.DirectoryServices.AccountManagement;
     }
 
     if ( -not $domainName)
@@ -27,7 +25,34 @@ function NetUserPrincipal {
                                                                                                 [System.DirectoryServices.AccountManagement.IdentityType]::SamAccountName, 
                                                                                                 $userName
                                                                                                 );
-    return $userPrincipal
+    return $userPrincipal;
 }
 
-Export-ModuleMember -Function NetUserPrincipal
+function Get-NetGroupPrincipal
+{
+    param (
+        [string] $domainName,
+        [Parameter(Mandatory)]
+        [string] $groupName
+    )
+
+    if ( -not ("System.DirectoryServices.AccountManagement.PrincipalContext" -as [type])) 
+    { 
+        Add-Type -AssemblyName System.DirectoryServices.AccountManagement;
+    }
+
+    if ( -not $domainName)
+    {
+        $domainName = $env:USERDNSDOMAIN;
+    }
+
+    $context = [System.DirectoryServices.AccountManagement.PrincipalContext]::new([System.DirectoryServices.AccountManagement.ContextType]::Domain, $domainName);
+    $groupPrincipal = [System.DirectoryServices.AccountManagement.GroupPrincipal]::FindByIdentity(
+                                                                                                 $context, 
+                                                                                                 [System.DirectoryServices.AccountManagement.IdentityType]::SamAccountName, 
+                                                                                                 $groupName
+                                                                                                 );
+    return $groupPrincipal;
+}
+
+Export-ModuleMember -Function Get-NetUserPrincipal, Get-NetGroupPrincipal
